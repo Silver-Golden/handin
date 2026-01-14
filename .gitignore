@@ -38,3 +38,8 @@ npm-debug.log
 
 /uploads
 .env
+
+# used by the local db script
+/data
+
+/.idea
