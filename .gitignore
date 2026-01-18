@@ -43,3 +43,9 @@ npm-debug.log
 /data
 
 /.idea
+result
+test.*
+
+# fopr moving the installation
+/existing
+.env.*

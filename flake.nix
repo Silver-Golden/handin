@@ -76,6 +76,8 @@
               beam27Packages.erlang
               beam27Packages.elixir
               inotify-tools
+              flyctl
+              awscli2
             ];
           };
         };
