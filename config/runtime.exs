@@ -28,7 +28,8 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-  maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
+  maybe_ipv6 = []
+  # maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
   config :handin, Handin.Repo,
     # ssl: true,
@@ -64,7 +65,8 @@ if config_env() == :prod do
     secret_key_base: secret_key_base
 
   config :waffle,
-    storage: Waffle.Storage.S3,
+    # storage: Waffle.Storage.S3,
+    storage: Waffle.Storage.Local,
     bucket: System.get_env("AWS_S3_BUCKET")
 
   config :ex_aws,

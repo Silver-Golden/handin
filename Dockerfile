@@ -13,7 +13,7 @@
 #
 ARG ELIXIR_VERSION=1.18.2
 ARG OTP_VERSION=27.2
-ARG DEBIAN_VERSION=bullseye-20251117-slim
+ARG DEBIAN_VERSION=bullseye-20251117
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
@@ -70,7 +70,7 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
+RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales dnsutils \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
@@ -91,4 +91,4 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/handin ./
 
 USER nobody
 
-CMD  ["sh", "-c", "/app/bin/migrate && /app/bin/server"]
+CMD  ["sh", "-c", "cat /etc/resolv.conf && dig db && /app/bin/migrate && /app/bin/server"]
