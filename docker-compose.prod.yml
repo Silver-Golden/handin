@@ -12,6 +12,11 @@ services:
       - ./data/db:/var/lib/postgresql/data
     ports:
       - "9935:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DATABASE}'" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   handin:
     build: .
