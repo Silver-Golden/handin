@@ -70,7 +70,7 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales dnsutils curl \
+RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales curl \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
@@ -91,4 +91,4 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/handin ./
 
 USER nobody
 
-CMD  ["sh", "-c", "cat /etc/resolv.conf && dig db && /app/bin/migrate && /app/bin/server"]
+CMD  ["sh", "-c", "/app/bin/migrate && /app/bin/server"]
