@@ -59,7 +59,7 @@ defmodule Handin.AssignmentSubmissionServer do
   end
 
   defp run_main_script(state) do
-    case @machine_api.exec(state.machine_id, "sh ./main.sh") do
+    case @machine_api.exec(state.machine_id, "ls -lah . && ls -lah / && sh ./main.sh") do
       {:ok, %{"exit_code" => 0} = response} ->
         save_run_script_results(state, :pass)
 
