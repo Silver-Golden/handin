@@ -203,10 +203,12 @@ defmodule Handin.AssignmentSubmissionServer do
   end
 
   defp build_all_scripts(state) do
-    build_main_script(state.assignment) ++
+    tmp = build_main_script(state.assignment) ++
       build_file_download_script(state.assignment, state.user_id) ++
       build_check_script(state.assignment) ++
       build_tests_scripts(state.assignment)
+    IO.puts tmp
+      tmp
   end
 
   defp machine_started?(machine, attempts \\ 0) do
