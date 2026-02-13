@@ -42,8 +42,8 @@ services:
       PHX_HOST: ${PHX_HOST}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       SENTRY_DSN: ${SENTRY_DSN}
-    volumes:
-      - ./data/handin:/app/bin/uploads
+#    volumes:
+#      - ./data/handin:/app/bin/uploads
     ports:
       - "4001:4000"
     depends_on:
